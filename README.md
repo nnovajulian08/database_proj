@@ -1,2 +1,2 @@
-# database_proj
+# Database Project
 FECD Database Project
