@@ -76,43 +76,43 @@ CREATE TABLE Skills (
 -- ===============================================================
 
 CREATE TABLE Technician_Skill (
-    technician_id INT REFERENCES Technician(person_id) ON DELETE CASCADE,
+    technician_id VARCHAR(50) REFERENCES Technician(person_id) ON DELETE CASCADE,
     skill_name VARCHAR(100) REFERENCES Skills(skill_name) ON DELETE CASCADE,
     PRIMARY KEY (technician_id, skill_name)
 );
 
 CREATE TABLE Connections (
-    connection_id SERIAL PRIMARY KEY,
-    property_address TEXT,
+    connection_id VARCHAR(50) PRIMARY KEY,
+    property_address TEXT NOT NULL,
     install_date DATE,
     meter_serial VARCHAR(100),
     connection_type VARCHAR(50) REFERENCES Connection_Type(connection_type),
     status VARCHAR(50) REFERENCES Status(status),
-    client_id INT REFERENCES Client(person_id) ON DELETE CASCADE,
-    technician_id INT REFERENCES Technician(person_id)
+    client_id VARCHAR(50) REFERENCES Client(person_id) ON DELETE CASCADE,
+    technician_id VARCHAR(50) REFERENCES Technician(person_id)
 );
 
 CREATE TABLE Bills (
-    bills_id SERIAL PRIMARY KEY,
+    bills_id VARCHAR(50) PRIMARY KEY,
     period_starts DATE,
     period_ends DATE,
     kwh_used NUMERIC,
     amount NUMERIC(10,2),
     issue_date DATE,
     payment_date DATE,
-    client_id INT REFERENCES Client(person_id),
-    connection_id INT REFERENCES Connections(connection_id)
+    client_id VARCHAR(50) REFERENCES Client(person_id),
+    connection_id VARCHAR(50) REFERENCES Connections(connection_id)
 );
 
 CREATE TABLE Service_Orders (
-    service_order_id SERIAL PRIMARY KEY,
+    service_order_id VARCHAR(50) PRIMARY KEY,
     service_type VARCHAR(50) REFERENCES Service_Type(service_type),
     start_date DATE,
     end_date DATE,
     notes TEXT,
-    client_id INT REFERENCES Client(person_id),
-    technician_id INT REFERENCES Technician(person_id),
-    connection_id INT REFERENCES Connections(connection_id)
+    client_id VARCHAR(50) REFERENCES Client(person_id),
+    technician_id VARCHAR(50) REFERENCES Technician(person_id),
+    connection_id VARCHAR(50) REFERENCES Connections(connection_id)
 );
 
 -- ===============================================================
