@@ -12,7 +12,7 @@ Bills (bills_id [PK], period_starts, period_ends, kwh_used, amount, issue_date, 
 
 Connections ( connection_id [PK], property_address, install_date, meter_serial, #connection_type -> Connection Type, #status -> Status, #client_id -> Client, #technician_id -> Technician)
 
-Service_Orders (service_order_id [PK], service_type, start_date, end_date, notes, #client_id -> Client, #technician_id -> Technician, #connection_id -> Connections, #service_type -> Service Type)
+Service_Orders (service_order_id [PK], start_date, end_date, notes, #client_id -> Client, #technician_id -> Technician, #connection_id -> Connections, #service_type -> Service Type)
 
 Connection Type (connection_type [PK]) 
 
@@ -21,4 +21,3 @@ Status (status [PK])
 Region (region_name [PK])
 
 Service Type (service_type [PK])
-
