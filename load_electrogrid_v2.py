@@ -76,9 +76,16 @@ region_df = raw_tdf[['region']].drop_duplicates()
 connection_type_df = raw_cndf[['connection_type']].drop_duplicates()
 status_df = raw_cndf[['status']].drop_duplicates()
 service_type_df = raw_sdf[['service_type']].drop_duplicates()
-person_df = (pd.concat([raw_cdf[['client_id', 'client_name', 'email', 'phone']].drop_duplicates()
-                       .rename( columns={'client_id': 'person_id', 'client_name': 'name'}),
-                       raw_tdf[['technician_id', 'technician_name', 'email', 'phone']].drop_duplicates()
-                       .rename( columns={'technician_id': 'person_id', 'technician_name': 'name'})],
-                       ignore_index=True))
+person_df = (pd.concat([raw_cdf[['client_id', 'client_name', 'email', 'phone']]
+                       .rename( columns={'client_id': 'person_id', 'client_name': 'name'})
+                       .drop_duplicates(subset=['person_id'], keep='first'),
+                       raw_tdf[['technician_id', 'technician_name', 'email', 'phone']]
+                       .rename( columns={'technician_id': 'person_id', 'technician_name': 'name'})
+                       .drop_duplicates(subset=['person_id'], keep='first')],
+                       ignore_index=True)).drop_duplicates(subset=['phone'], keep='first')
 person_df['phone'] = person_df['phone'].astype(str).str.replace(r'[^\d]', '', regex=True).str[-9:]
+client_df = (raw_cdf[['client_id', 'address']]
+             .drop_duplicates(subset=['client_id'], keep='first')
+             .rename( columns={'client_id': 'person_id', 'client_name': 'name'}))
+
+print(client_df)
