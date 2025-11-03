@@ -1,0 +1,121 @@
+technician_id,technician_name,email,phone,region,skills
+T001,Letícia Machado,marcossimoes@rodrigues.com,922038862,Porto,"Installation, Repair"
+T002,Manuel Lima,santosgabriela@araujo.net,(351) 934 530 693,Coimbra,Inspection
+T003,Tatiana Nunes,miguelreis@jesus.com,(351) 931 816 778,Lisboa,Inspection
+T004,Mafalda Araújo,lleite@ferreira.org,3.51964E+11,Porto,"Installation, Repair"
+T005,Salomé Araújo,npires@melo.com,3.51914E+11,Faro,"Installation, Repair"
+T006,Rafaela da Nogueira,kreis@pinho.com,(351) 964 579 271,Porto,"Installation, Repair"
+T007,Luca Sousa-Brito,vitor30@vaz.org,(351) 924 238 397,Lisboa,Inspection
+T008,Mauro Faria,isabelabarros@batista.com,912 932 880,Porto,Inspection
+T009,Matilde-Ema Carvalho,fabioandrade@almeida.net,(351) 920 018 676,Faro,Inspection
+T010,Bárbara Andrade,nascimentoluna@torres.pt,(351) 930814356,Faro,Meter Replacement
+T011,Guilherme Antunes,inesgaspar@santos.net,(351) 919807468,Porto,Inspection
+T012,Eduardo Guerreiro,amelia95@amorim.net,(351) 927 620 545,Faro,Meter Replacement
+T013,Jéssica-Letícia Assunção,antonio06@simoes.pt,934 110 654,Coimbra,Inspection
+T014,Tiago Baptista,noaabreu@nunes.pt,(351) 926994970,Lisboa,Meter Replacement
+T015,Nicole de Loureiro,beatrizmarques@gaspar.pt,299962697,Porto,"Installation, Repair"
+T016,Micael Esteves,jpacheco@monteiro.com,3.51961E+11,Faro,"Installation, Repair"
+T017,Noa Mendes,salves@branco.com,935 789 826,Coimbra,Meter Replacement
+T018,Henrique Azevedo,pereiravasco@assuncao.pt,935177741,Coimbra,"Installation, Repair"
+T019,Marcos Gaspar,lpires@barbosa.org,(351) 919962642,Faro,"Installation, Repair"
+T020,Denis Pires,gjesus@melo.org,3.51964E+11,Faro,"Installation, Repair"
+T021,Ana Guerreiro,imoura@pereira.com,3.51967E+11,Coimbra,Meter Replacement
+T022,Tiago da Maia,claudio72@brito.com,932895400,Lisboa,"Installation, Repair"
+T023,Marcos Neto,isaacsa@torres.pt,(351) 911261685,Porto,Inspection
+T024,Marco Araújo,leiteiris@baptista.pt,(351) 919 271 152,Coimbra,"Installation, Repair"
+T025,Beatriz Vieira,vieiratome@matos.net,(351) 930 716 950,Lisboa,"Installation, Repair"
+T026,Marco Ferreira,mourajoana@pacheco.pt,(351) 963298769,Faro,Meter Replacement
+T027,Mia Cunha-Maia,gaspar94@monteiro.com,921 982 734,Faro,Meter Replacement
+T028,Beatriz Cunha-Valente,amorimmauro@andrade.com,3.51939E+11,Lisboa,Meter Replacement
+T029,Ema Vaz,bianca48@leal.com,914 860 673,Coimbra,Inspection
+T030,Marta-Emma Torres,pedro88@oliveira.pt,(351) 264 628 055,Coimbra,"Installation, Repair"
+T031,Luca Matos,nuria06@melo.pt,3.51932E+11,Lisboa,Inspection
+T032,Pedro Amorim,victoria51@mota.com,(351) 923111786,Lisboa,Connection Setup
+T033,Pedro Sousa,campossamuel@teixeira.pt,3.51202E+11,Faro,Meter Replacement
+T034,Fabiana Tavares,sousajaime@azevedo.com,965 950 026,Lisboa,Meter Replacement
+T035,Bruno Guerreiro,lealleonardo@leite.pt,3.51921E+11,Porto,Inspection
+T036,Daniel Miranda,limapatricia@rodrigues.com,(351) 210 064 934,Porto,Meter Replacement
+T037,Enzo Sá,abreunelson@branco.com,(351) 966 089 411,Faro,Meter Replacement
+T038,Gabriela Ribeiro-Ramos,dominguesmargarida@ramos.com,255359520,Porto,Inspection
+T039,Júlia Assunção,antunesamelia@paiva.com,(351) 926 968 018,Coimbra,Inspection
+T040,Soraia Matos,cfigueiredo@morais.com,(351) 963 944 953,Faro,Connection Setup
+T041,Afonso Machado,ymendes@jesus.net,(351) 915 017 365,Faro,Inspection
+T042,Daniel Machado-Coelho,fernando78@coelho.com,(351) 929 233 451,Coimbra,Inspection
+T043,Alexandre Vicente,pereirabruno@soares.com,3.51933E+11,Lisboa,Meter Replacement
+T044,Alexandre de Batista,macedoadriana@domingues.com,(351) 914 575 988,Faro,Connection Setup
+T045,Inês Paiva,duartecarvalho@goncalves.com,910 336 202,Coimbra,Inspection
+T046,Juliana Lima,diegoferreira@miranda.com,(351) 960711523,Lisboa,Connection Setup
+T047,Adriana Coelho-Correia,ktavares@rodrigues.com,3.51938E+11,Porto,"Installation, Repair"
+T048,Bianca-Leonor Barros,mourabenedita@nogueira.com,3.5192E+11,Porto,Inspection
+T049,Ana do Anjos,manuel78@araujo.com,939728454,Lisboa,Connection Setup
+T050,Samuel Barbosa,ivanvalente@carneiro.com,(351) 962 839 482,Porto,Connection Setup
+T051,David do Cardoso,ferreiraduarte@freitas.pt,(351) 933281165,Faro,Connection Setup
+T052,Nair-Sofia Costa,soaresgabriel@branco.net,(351) 964 232 277,Coimbra,"Installation, Repair"
+T053,Camila Tavares,fernandesvicente@andrade.pt,3.51921E+11,Porto,Meter Replacement
+T054,Soraia Pinto,biancamendes@lima.pt,(351) 929832102,Coimbra,"Installation, Repair"
+T055,Leandro Sousa,monteiropedro@pires.com,(351) 919 831 043,Coimbra,Connection Setup
+T056,Filipa Araújo-Reis,kmachado@paiva.com,927 080 568,Lisboa,Connection Setup
+T057,Larissa Machado,yandrade@tavares.com,936550494,Porto,Meter Replacement
+T058,Henrique Santos-Amorim,zmatias@sousa.net,925 049 627,Lisboa,"Installation, Repair"
+T059,Daniel Carvalho,bbrito@baptista.com,(351) 923625854,Coimbra,Inspection
+T060,Carlos Soares,nogueirasalome@pinto.com,922 341 996,Lisboa,Meter Replacement
+T061,Filipe Costa-Pacheco,marco24@coelho.pt,(351) 965 833 343,Lisboa,"Installation, Repair"
+T062,Simão Faria,azevedonuria@simoes.pt,910 545 769,Coimbra,Connection Setup
+T063,Martim Jesus-Mendes,tpinho@valente.pt,(351) 935 365 974,Porto,"Installation, Repair"
+T064,Júlia Vaz,baraujo@freitas.com,3.51925E+11,Coimbra,Meter Replacement
+T065,Mafalda Baptista,joel69@henriques.pt,(351) 272130742,Lisboa,"Installation, Repair"
+T066,Joel do Pinho,fonsecajoaquim@borges.org,(351) 964 893 326,Lisboa,"Installation, Repair"
+T067,Henrique Guerreiro,leonardo07@domingues.pt,(351) 210 081 785,Porto,Connection Setup
+T068,Denis Borges,loureirorenata@baptista.org,3.51912E+11,Porto,Inspection
+T069,Eva Fonseca,hanjos@correia.com,(351) 928 652 377,Lisboa,Connection Setup
+T070,Camila Pereira,rmagalhaes@maia.net,(351) 937 014 005,Lisboa,Meter Replacement
+T071,Lourenço Nogueira,amaralvasco@santos.com,(351) 930 272 214,Faro,Inspection
+T072,Igor Miranda,fredericomartins@pires.net,(351) 933681720,Lisboa,Meter Replacement
+T073,César Costa,wreis@teixeira.com,966209297,Faro,Meter Replacement
+T074,Ivo de Valente,lia53@campos.pt,(351) 293 899 204,Faro,Connection Setup
+T075,Luciana Sá,yasminlima@branco.pt,(351) 918507610,Porto,Inspection
+T076,Lorena Andrade-Nascimento,xavierpires@borges.com,(351) 936 010 712,Lisboa,"Installation, Repair"
+T077,Bianca Lima,irinasoares@teixeira.pt,(351) 928467357,Coimbra,"Installation, Repair"
+T078,Daniel Campos-Cruz,naiaracardoso@carneiro.com,(351) 964258922,Lisboa,Inspection
+T079,Valentim Lima,yantunes@reis.pt,(351) 966 373 118,Porto,"Installation, Repair"
+T080,Gil Machado,gfreitas@abreu.net,(351) 218520136,Porto,Inspection
+T081,Kevin Silva,nascimentoyasmin@silva.pt,(351) 297 561 547,Porto,"Installation, Repair"
+T082,Joaquim Guerreiro,isabela12@loureiro.pt,(351) 931195564,Coimbra,"Installation, Repair"
+T083,Noa Simões,pereirarafaela@pinho.net,3.51918E+11,Lisboa,Meter Replacement
+T084,David Alves,ivan62@assuncao.com,(351) 961241393,Faro,Inspection
+T085,Nádia Magalhães,knogueira@magalhaes.com,967312677,Lisboa,Connection Setup
+T086,Bruno do Coelho,biancasantos@soares.com,259 889 786,Lisboa,Connection Setup
+T087,Erica Rocha,lunasousa@costa.com,(351) 916543089,Faro,Inspection
+T088,Daniela Esteves,camposbryan@borges.pt,(351) 925 764 497,Porto,"Installation, Repair"
+T089,Luna Abreu,abreugoncalo@pacheco.pt,914 486 764,Faro,Meter Replacement
+T090,Lia-Mélanie Melo,duarte63@leite.pt,(351) 934 500 635,Faro,Connection Setup
+T091,Sara Domingues,ccosta@fonseca.pt,(351) 927 711 952,Faro,"Installation, Repair"
+T092,Sara-Jéssica Domingues,kevim05@valente.com,(351) 925 512 827,Porto,"Installation, Repair"
+T093,Renata Cruz,pgomes@guerreiro.pt,915 466 345,Faro,Meter Replacement
+T094,Gustavo Vieira-Domingues,patricia41@ramos.com,919 993 934,Porto,Inspection
+T095,Nuno Melo-Garcia,julianafonseca@figueiredo.com,968223095,Lisboa,Inspection
+T096,Larissa de Pires,nvalente@barbosa.net,(351) 911 097 202,Faro,Inspection
+T097,Marco Andrade,thenriques@correia.org,925 579 220,Faro,Inspection
+T098,Alexandre de Gomes,isabela64@araujo.com,(351) 290 025 121,Coimbra,Connection Setup
+T099,Valentim Miranda,adriana58@correia.pt,3.51927E+11,Lisboa,"Installation, Repair"
+T100,Bernardo Figueiredo,ines43@tavares.pt,916 311 388,Faro,"Installation, Repair"
+T101,Andreia Cruz,joaquim36@simoes.com,(351) 913474246,Porto,"Installation, Repair"
+T102,Salvador Barros,gomesluis@torres.pt,936800852,Porto,Inspection
+T103,Filipa-Jéssica Pinheiro,cardosomargarida@rodrigues.pt,(351) 961743043,Lisboa,Connection Setup
+T104,Ângela Cardoso,franciscalopes@carneiro.org,936 527 523,Faro,Connection Setup
+T105,David Neto,luanaesteves@brito.com,3.51927E+11,Lisboa,Connection Setup
+T106,Filipe Costa,amelia77@vaz.pt,250 762 799,Porto,Inspection
+T107,Victória Guerreiro,soraiaantunes@freitas.net,(351) 961 239 847,Faro,"Installation, Repair"
+T108,Frederico Amaral,marciotorres@andrade.pt,(351) 290 172 224,Faro,Meter Replacement
+T109,Joel Antunes,avalente@silva.pt,(351) 927754619,Faro,Meter Replacement
+T110,Gaspar Anjos,olopes@nogueira.pt,(351) 258122590,Faro,Connection Setup
+T111,Yasmin-Salomé Leal,wmachado@torres.org,932373379,Lisboa,Inspection
+T112,Edgar Barbosa,diogobaptista@borges.com,(351) 915869017,Coimbra,Inspection
+T113,Marcos Gaspar,ribeiroluca@lima.pt,(351) 929 517 122,Porto,"Installation, Repair"
+T114,Martim Macedo,martim38@coelho.com,(351) 925 422 162,Coimbra,"Installation, Repair"
+T115,Renata Henriques,kyara63@vicente.net,(351) 934 447 048,Porto,Connection Setup
+T116,Lúcia do Pinto,andre47@carvalho.pt,3.51285E+11,Lisboa,"Installation, Repair"
+T117,Ricardo Tavares-Coelho,omartins@carneiro.pt,(351) 242 777 522,Porto,Inspection
+T118,Melissa Cardoso,marquesdinis@leite.com,(351) 292059229,Porto,"Installation, Repair"
+T119,Bárbara Assunção,victoria63@cardoso.pt,913 637 262,Lisboa,Connection Setup
+T120,Raquel Coelho,matiasvitor@jesus.com,3.51921E+11,Porto,Inspection

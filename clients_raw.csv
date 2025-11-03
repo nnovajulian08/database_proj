@@ -1,0 +1,101 @@
+client_id,client_name,email,phone,address,property_address,connection_id,status
+C162,Inês Almeida,mariopinheiro@example.org,913 009 792,"R. Ema Baptista, 195, 5281-273 Vila Nova de Santo André","Alameda de Guerreiro, 61, 9885-217 Pinhel",CN1000,Disconnected
+C594,Iara Fernandes,pteixeira@example.org,(351) 928945590,"Av Amaral, 59, 4894-204 Póvoa de Santa Iria","Avenida Guerreiro, 43, 9900-094 Rio Tinto",CN1001,Suspended
+C527,Ivan Faria,baptistamateus@example.net,230748207,"Avenida de Baptista, 49, 0655-782 Chaves","R. dos Estorninhos, 95, 5854-551 Elvas",CN1002,Active
+C575,Guilherme Alves,hribeiro@example.org,+351920952294,"Rua Tavares, 75, 0399-529 Alcácer do Sal","Rua Tavares, 75, 0399-529 Alcácer do Sal",CN1003,Active
+C108,Carlota Carneiro,frocha@example.net,+351912895392,"R. de Castro, 709, 2959-391 Estremoz","R. de Castro, 709, 2959-391 Estremoz",CN1004,Suspended
+C414,Kyara da Reis,simaorodrigues@example.org,935856728,"Alameda da Universidade, 415, 3324-913 Tondela","Alameda Pinheiro, S/N, 9220-269 Chaves",CN1005,Suspended
+C184,Diego Freitas,lealvitor@example.net,229962914,"Alameda de Baptista, 63, 4384-215 Guimarães","Av Nelson Mandela, 122, 1386-047 Seia",CN1006,Disconnected
+C500,Jéssica Gomes,artur57@example.org,(351) 923 627 924,"Av Lucas Matos, 77, 7537-260 Fafe","Praça da Cruz, 64, 7413-401 Évora",CN1007,Suspended
+C589,Bruna Macedo,igorlima@example.net,(351) 916488208,"Rua do Bicalho, S/N, 2467-287 Santa Cruz","Praça Leonardo Sousa, 4, 4402-825 Fiães",CN1008,Disconnected
+C489,João Freitas-Miranda,rafael89@example.com,(351) 278769899,"Avenida de Sá, 95, 4444-983 Paredes","Avenida de Sá, 95, 4444-983 Paredes",CN1009,Active
+C016,Laura do Melo,sofiamonteiro@example.com,(351) 923487347,"Travessa Sandro Guerreiro, 31, 3623-166 Vila Franca de Xira","Travessa Sandro Guerreiro, 31, 3623-166 Vila Franca de Xira",CN1010,Disconnected
+C267,Daniel Antunes,tantunes@example.net,931 108 046,"Rua da Aldeia, 19, 6769-915 Serpa","Rua da Aldeia, 19, 6769-915 Serpa",CN1011,Suspended
+C437,Paulo Rodrigues,pereiraeduardo@example.org,(351) 915996605,"Alameda Ribeiro, 460, 0514-607 Portalegre","Largo Leite, 79, 2562-221 Penafiel",CN1012,Active
+C203,Valentina Soares,hhenriques@example.net,225309251,"Alameda Ivan Tavares, 38, 3902-196 Alcácer do Sal","Travessa Mia Amorim, 13, 1776-135 Abrantes",CN1013,Suspended
+C268,Irina do Correia,barrosandre@example.net,(351) 293 928 456,"Rua Gonçalo Andrade, S/N, 4968-549 Fafe","Largo do Pedregulho, 786, 2784-178 Tondela",CN1014,Suspended
+C215,Benedita Henriques,piresmadalena@example.org,963430187,"Praça Rui Pires, 18, 6265-650 Pombal","Avenida Pereira, S/N, 4992-164 Angra do Heroísmo",CN1015,Disconnected
+C273,Luana de Henriques,fabiana77@example.com,(351) 939690333,"Rua do Sapal, 36, 4812-147 Lixa","Largo Matos, 9, 4361-168 Entroncamento",CN1016,Active
+C042,Fabiana Cunha,leitebeatriz@example.org,(351) 969784036,"Travessa Leonardo Brito, 64, 0762-268 Torres Novas","Travessa Rafaela Figueiredo, 93, 6535-232 Santana",CN1017,Disconnected
+C087,Ismael Pacheco,omiranda@example.com,(351) 922 660 937,"Rua Cruz, 21, 5537-147 Queluz","Av Sá, 66, 9170-851 Lourosa",CN1018,Active
+C305,Bruna Borges,fabianavaz@example.com,921859484,"Largo Tatiana Macedo, 6, 7924-082 Estremoz","Travessa de Luís António Verney, S/N, 6329-573 Torres Vedras",CN1019,Disconnected
+C404,Bruno Nogueira,brancorenata@example.org,926457938,"Largo Loureiro, S/N, 9168-154 Ribeira Grande","Largo Loureiro, S/N, 9168-154 Ribeira Grande",CN1020,Active
+C052,Ana Rocha,qloureiro@example.net,(351) 925 153 195,"Largo de Rodrigues, 8, 2217-043 Guimarães","Avenida Laura Matias, 1, 9951-670 Peniche",CN1021,Suspended
+C087,Ismael Pacheco,omiranda@example.com,(351) 922 660 937,"Rua Cruz, 21, 5537-147 Queluz","Rua Cruz, 21, 5537-147 Queluz",CN1022,Active
+C280,Sérgio Paiva,machadonicole@example.org,(351) 912484137,"Avenida de Barros, 75, 2438-070 Silves","Avenida de Barros, 75, 2438-070 Silves",CN1023,Disconnected
+C099,Noah Soares,estevessara@example.net,(351) 910 030 756,"Alameda Domingues, 73, 4195-180 Lisboa","Av Monteiro, 8, 9994-457 Oliveira do Hospital",CN1024,Active
+C102,Frederico Gaspar,rodrigo65@example.com,964 313 291,"Praça Carolina Guerreiro, 91, 3747-411 Oliveira de Azeméis","Praça do Colégio, 37, 6041-348 Angra do Heroísmo",CN1025,Disconnected
+C152,Nádia Guerreiro,rpereira@example.com,(351) 928 463 920,"Largo Machado, 227, 5003-691 Portimão","Travessa Mota, 77, 8455-939 Paços de Ferreira",CN1026,Active
+C253,Ângelo Nogueira,xavier28@example.net,(351) 963188485,"Travessa Faria, 96, 0548-510 Seia","Travessa Faria, 96, 0548-510 Seia",CN1027,Suspended
+C160,Alice Cardoso,nogueiraantonio@example.org,(351) 924427031,"Rua do Carrasco, 84, 7051-204 Bragança","Rua do Carrasco, 84, 7051-204 Bragança",CN1028,Active
+C216,Helena Melo,cunharenata@example.com,927 426 629,"Travessa Clara Neves, 71, 0646-287 Guimarães","R. Pereira, S/N, 3504-960 Santana",CN1029,Active
+C452,Wilson Cruz,bryan90@example.org,+351924257306,"Avenida de Domingues, 4, 7071-398 Vila Nova de Santo André","Largo Cardoso, S/N, 1329-887 Freamunde",CN1030,Disconnected
+C424,Yara do Vicente,zalves@example.net,(351) 960960035,"Rua de Pinheiro, 858, 9592-323 Gafanha da Nazaré","Rua de Pinheiro, 858, 9592-323 Gafanha da Nazaré",CN1031,Active
+C353,Flor Araújo,andre70@example.org,(351) 969107406,"Travessa Brito, 94, 1423-691 Leiria","Av de Carneiro, 2, 6981-413 Mirandela",CN1032,Disconnected
+C077,Petra Antunes-Neves,assuncaomatilde@example.org,(351) 916 231 203,"Praça Silva, 10, 0084-840 Fátima","Praça Silva, 10, 0084-840 Fátima",CN1033,Suspended
+C370,Joaquim Fonseca-Silva,yasmin90@example.org,(351) 295427707,"Largo Morais, 783, 9149-851 Gafanha da Nazaré","Rua Filipa Maia, 16, 5701-703 Gouveia",CN1034,Disconnected
+C511,Adriana Barros,mmoura@example.org,(351) 258486899,"Praça Valente, 58, 0450-691 Sacavém","Alameda de Garcia, S/N, 8308-306 Vale de Cambra",CN1035,Active
+C452,Wilson Cruz,bryan90@example.org,+351924257306,"Avenida de Domingues, 4, 7071-398 Vila Nova de Santo André","Av de Brito, 17, 8814-112 Olhão",CN1036,Disconnected
+C336,Larissa Soares,alexandremarques@example.org,(351) 910 258 955,"Alameda José Ramos, 760, 6265-826 Coimbra","Praça de Anjos, 18, 6933-154 Guarda",CN1037,Suspended
+C253,Ângelo Nogueira,xavier28@example.net,(351) 963188485,"Travessa Faria, 96, 0548-510 Seia","Travessa Faria, 96, 0548-510 Seia",CN1038,Active
+C288,Alice Lourenço,wazevedo@example.com,228246747,"Avenida da Galega, 8, 2300-857 Sacavém","Largo Vicente, 79, 5779-911 Seia",CN1039,Active
+C190,Lourenço Castro,alicia19@example.org,+351257013290,"Travessa das Necessidades, 89, 3549-465 Ílhavo","Travessa das Necessidades, 89, 3549-465 Ílhavo",CN1040,Disconnected
+C083,Naiara Ramos,carlotabarros@example.org,(351) 206596575,"Largo de Pires, 637, 6547-935 Montemor-o-Novo","Av da Graça, S/N, 1929-022 Praia da Vitória",CN1041,Active
+C433,Mariana Esteves,vicentecarneiro@example.org,(351) 919 328 963,"Travessa das Necessidades, 86, 5240-148 Lagoa","Travessa de Cartes, 69, 9041-898 Santarém",CN1042,Disconnected
+C057,Camila Ramos-Baptista,goncalvesalexandra@example.net,918669125,"Largo das Andorinhas, 39, 6801-824 Fiães","Avenida Alves, S/N, 7896-951 Abrantes",CN1043,Active
+C021,Vítor da Paiva,bleal@example.com,+351912735454,"Avenida Marco Valente, 97, 7770-143 Macedo de Cavaleiros","R. de Matos, 33, 8520-232 Vizela",CN1044,Disconnected
+C308,Bárbara Leal,gabrielaborges@example.com,(351) 274430963,"Praça dos Moinhos, 80, 4510-526 Albufeira","Av das Gaivotas ao Parque das Nações, S/N, 9158-912 Vila Franca de Xira",CN1045,Suspended
+C074,Sofia Campos,jantunes@example.com,928 826 343,"Largo do Duro, 13, 6990-139 São Mamede de Infesta","Av Gaspar, S/N, 9182-851 Santa Comba Dão",CN1046,Active
+C563,Rafael Vaz,teresamorais@example.org,(351) 935238885,"Largo Irina Martins, 60, 7874-422 Peso da Régua","Largo Irina Martins, 60, 7874-422 Peso da Régua",CN1047,Active
+C529,Constança Sousa-Marques,azevedovera@example.org,(351) 961 261 632,"R. do Prof. Egas Moniz, 48, 6297-454 Almada","Largo Rafael Sousa, 290, 5996-706 Beja",CN1048,Suspended
+C183,Sebastião Jesus,alexandra99@example.org,(351) 923 557 702,"Largo do Prof. Hernâni Monteiro, 90, 9588-039 Ponte de Sor","Rua Vera Pinto, S/N, 2600-014 Angra do Heroísmo",CN1049,Suspended
+C556,Yasmin Nunes,carneirogabriel@example.org,+351920938694,"Largo de Vicente, 98, 1457-887 Santiago do Cacém","Praça de Castro, 702, 5686-295 Estarreja",CN1050,Disconnected
+C156,Pilar Gaspar,laura64@example.com,+351969876220,"Avenida de Cruz, 7, 1178-006 Costa da Caparica","Avenida Cardeal Cerejeira, 40, 5084-243 Viana do Castelo",CN1051,Active
+C026,Fabiana Moura,fmatos@example.net,(351) 936 594 013,"R. Monteiro, 57, 9671-756 Paredes","Alameda de Chaves de Oliveira, 51, 9396-061 Matosinhos",CN1052,Suspended
+C464,Teresa Antunes,razevedo@example.net,960 159 591,"Largo de Carrilho Videira, 85, 7583-392 Ponte de Sor","Largo de Carrilho Videira, 85, 7583-392 Ponte de Sor",CN1053,Suspended
+C549,Jorge Neves,ramosmafalda@example.com,(351) 914915076,"Alameda das Laranjeiras, 1, 3440-777 Rebordosa","Alameda das Laranjeiras, 1, 3440-777 Rebordosa",CN1054,Suspended
+C503,Filipa Machado,brunoandrade@example.com,(351) 912 369 362,"Av Daniel Carneiro, S/N, 7137-271 Setúbal","Largo Isabela Abreu, 12, 3638-564 Bragança",CN1055,Suspended
+C224,João Magalhães,vicenteivan@example.org,+351963539613,"Travessa de Rodrigues, 85, 7842-711 Tavira","Travessa de Rodrigues, 85, 7842-711 Tavira",CN1056,Suspended
+C189,Henrique Nogueira,lmagalhaes@example.com,(351) 919382761,"Alameda Central, 48, 1971-997 Vila Nova de Santo André","Alameda Central, 48, 1971-997 Vila Nova de Santo André",CN1057,Suspended
+C025,Kévim Melo,cgaspar@example.org,(351) 964713493,"R. Miguel Campos, S/N, 2499-471 Oliveira de Azeméis","R. Miguel Campos, S/N, 2499-471 Oliveira de Azeméis",CN1058,Disconnected
+C358,Edgar Campos,ivannascimento@example.net,237744197,"Alameda do Adro, S/N, 6620-471 Albufeira","Alameda do Adro, S/N, 6620-471 Albufeira",CN1059,Disconnected
+C391,Kelly Lourenço-Macedo,tlima@example.net,+351918193242,"Travessa de Viterbo de Campos, S/N, 5205-756 Vila Real","Praça do Carregal, 61, 9220-949 Tarouca",CN1060,Suspended
+C223,Sofia Garcia,azevedosalvador@example.com,(351) 936479473,"Rua Panorâmica, S/N, 5207-167 Entroncamento","Avenida André Macedo, 5, 9375-919 Gafanha da Nazaré",CN1061,Active
+C404,Bruno Nogueira,brancorenata@example.org,926457938,"Largo Loureiro, S/N, 9168-154 Ribeira Grande","Largo Loureiro, S/N, 9168-154 Ribeira Grande",CN1062,Suspended
+C053,Igor Gonçalves,enunes@example.com,(351) 933 450 541,"Praça do José da Mestra, 35, 7584-161 Gafanha da Nazaré","R. de Monteiro, 5, 1461-331 Portalegre",CN1063,Suspended
+C395,Igor Pinho,carvalhoalvaro@example.org,+351967134324,"R. de Freitas, 6, 3343-244 Matosinhos","Largo de Grijó, 9, 8986-818 Loures",CN1064,Disconnected
+C527,Ivan Faria,baptistamateus@example.net,230748207,"Avenida de Baptista, 49, 0655-782 Chaves","R. Neves, 64, 2022-017 Olhão",CN1065,Suspended
+C430,Vicente Barbosa,ngarcia@example.org,(351) 913424579,"Alameda de Loureiro, 129, 0320-203 Reguengos de Monsaraz","Avenida de Viterbo de Campos, 860, 2643-850 Viseu",CN1066,Active
+C216,Helena Melo,cunharenata@example.com,927 426 629,"Travessa Clara Neves, 71, 0646-287 Guimarães","R. Pereira, S/N, 3504-960 Santana",CN1067,Active
+C351,Samuel Moreira-Ferreira,carlota05@example.com,+351928971480,"R. Tomás Mota, S/N, 9653-136 Mirandela","R. Ema Martins, 60, 7398-622 Mangualde",CN1068,Disconnected
+C152,Nádia Guerreiro,rpereira@example.com,(351) 928 463 920,"Largo Machado, 227, 5003-691 Portimão","Travessa Mota, 77, 8455-939 Paços de Ferreira",CN1069,Disconnected
+C254,Mia Vicente,mendessantiago@example.org,293544926,"Rua de Lopes, 31, 6110-627 Seia","Rua de Lopes, 31, 6110-627 Seia",CN1070,Suspended
+C438,Isabela Fernandes,barbara05@example.com,(351) 922388565,"Largo Lima, 48, 4116-597 Póvoa de Varzim","Largo Lima, 48, 4116-597 Póvoa de Varzim",CN1071,Active
+C186,Violeta-Helena Rocha,rubencosta@example.org,(351) 964857142,"Av Reis, 28, 8585-424 Funchal","Rua de Costa, S/N, 8111-719 Aveiro",CN1072,Active
+C427,Anita Matias,lucas16@example.com,(351) 924 502 329,"R. Nair Monteiro, S/N, 9345-962 Fundão","R. Nair Monteiro, S/N, 9345-962 Fundão",CN1073,Active
+C588,Emma Jesus-Valente,glima@example.com,912 409 649,"Travessa Letícia Martins, S/N, 7842-170 Vila Real","Travessa Letícia Martins, S/N, 7842-170 Vila Real",CN1074,Disconnected
+C116,Sofia Moura,xbrito@example.net,(351) 922 330 307,"Travessa Vasco Miranda, 26, 3579-727 Pombal","Travessa Daniel Andrade, 70, 9118-722 Montemor-o-Novo",CN1075,Disconnected
+C342,Xavier Guerreiro,almeidarui@example.net,(351) 915 379 538,"Rua de Neves, 2, 9196-655 Guarda","Rua de Neves, 2, 9196-655 Guarda",CN1076,Active
+C057,Camila Ramos-Baptista,goncalvesalexandra@example.net,918669125,"Largo das Andorinhas, 39, 6801-824 Fiães","Avenida Alves, S/N, 7896-951 Abrantes",CN1077,Disconnected
+C157,Ricardo Cardoso-Azevedo,ogoncalves@example.org,(351) 967228200,"Praça da Carvalhosa, 94, 2829-979 Valongo","Praça Reis, 19, 2379-006 Miranda do Douro",CN1078,Active
+C162,Inês Almeida,mariopinheiro@example.org,913 009 792,"R. Ema Baptista, 195, 5281-273 Vila Nova de Santo André","Travessa Ramos, 186, 7218-600 Fiães",CN1079,Disconnected
+C253,Ângelo Nogueira,xavier28@example.net,(351) 963188485,"Travessa Faria, 96, 0548-510 Seia","Travessa Faria, 96, 0548-510 Seia",CN1080,Disconnected
+C323,Benjamim Leite,yara24@example.com,(351) 286333021,"Alameda Loureiro, S/N, 9179-202 Estremoz","Alameda Loureiro, S/N, 9179-202 Estremoz",CN1081,Suspended
+C531,Maria de Figueiredo,sandro82@example.org,(351) 936 732 318,"Alameda Valente, 681, 2450-000 Alverca do Ribatejo","Alameda Valente, 681, 2450-000 Alverca do Ribatejo",CN1082,Suspended
+C125,Carlos Castro,gaspartome@example.net,+351916110022,"Travessa da Senhora da Lapa, 615, 1667-467 Freamunde","Avenida de Pinho, 66, 2853-533 Montijo",CN1083,Disconnected
+C231,Gabriel Sousa,aliciafaria@example.org,(351) 230347786,"R. Márcio Brito, S/N, 4820-700 Ourém","Travessa de Borges, 14, 9822-180 Póvoa de Varzim",CN1084,Disconnected
+C254,Mia Vicente,mendessantiago@example.org,293544926,"Rua de Lopes, 31, 6110-627 Seia","Rua de Lopes, 31, 6110-627 Seia",CN1085,Active
+C125,Carlos Castro,gaspartome@example.net,+351916110022,"Travessa da Senhora da Lapa, 615, 1667-467 Freamunde","Avenida de Pinho, 66, 2853-533 Montijo",CN1086,Disconnected
+C031,Amélia Reis-Araújo,lunasousa@example.com,(351) 216 117 240,"Travessa Lima, 36, 8692-221 Lourosa","Travessa Lima, 36, 8692-221 Lourosa",CN1087,Disconnected
+C470,Beatriz Loureiro,ccampos@example.net,+351282975147,"Travessa Grande, 62, 1058-752 Póvoa de Santa Iria","R. de Reis, S/N, 6175-518 Almada",CN1088,Suspended
+C195,Paulo Vicente,mariamelo@example.com,(351) 924 372 805,"Praça Tatiana Maia, 83, 3950-410 Silves","Praça Tatiana Maia, 83, 3950-410 Silves",CN1089,Disconnected
+C254,Mia Vicente,mendessantiago@example.org,293544926,"Rua de Lopes, 31, 6110-627 Seia","Rua de Lopes, 31, 6110-627 Seia",CN1090,Active
+C566,Petra Maia,soraiaabreu@example.org,+351968254318,"R. Correia, S/N, 3920-491 Póvoa de Santa Iria","R. Correia, S/N, 3920-491 Póvoa de Santa Iria",CN1091,Suspended
+C340,Filipe Azevedo,miguelfreitas@example.com,(351) 931 584 776,"R. de Costa, 246, 2376-769 Ovar","Rua de Rocha, 27, 0598-445 Mealhada",CN1092,Disconnected
+C245,Tatiana-Lorena Simões,zreis@example.com,+351922321941,"Alameda Batista, S/N, 7769-749 Reguengos de Monsaraz","Av de Miranda, 6, 7480-957 Viseu",CN1093,Active
+C345,Simão Anjos,yasmin01@example.org,(351) 214596422,"Largo Gustavo Pinheiro, 27, 9774-573 Matosinhos","Av José António Marques, 79, 0667-005 Rio Maior",CN1094,Active
+C141,Madalena Almeida,liasousa@example.org,932722992,"Rua Moreira, 2, 5303-856 Serpa","Largo de Miranda, 6, 3285-558 Ílhavo",CN1095,Active
+C593,Salomé Baptista,sebastiao94@example.com,(351) 961 192 920,"Alameda Nair Andrade, 21, 1603-988 Lagoa","Praça de Teixeira, 3, 3186-830 Vila Real de Santo António",CN1096,Disconnected
+C038,Gabriela da Rodrigues,antunesconstanca@example.com,931 771 159,"Travessa Luana Rocha, 68, 9847-896 Elvas","Largo de Mota, 69, 5055-362 Santo Tirso",CN1097,Disconnected
+C513,Vitória Pinto,motajessica@example.org,284136852,"Avenida Afonso de Albuquerque, 137, 2424-462 Horta","Avenida Afonso de Albuquerque, 137, 2424-462 Horta",CN1098,Disconnected
+C216,Helena Melo,cunharenata@example.com,927 426 629,"Travessa Clara Neves, 71, 0646-287 Guimarães","R. Pereira, S/N, 3504-960 Santana",CN1099,Disconnected
