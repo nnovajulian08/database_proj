@@ -4,9 +4,9 @@ Client (#person_id -> Person [PK] ,address [NN])
 
 Technician (#person_id -> Person [PK],#region_name -> Region)
 
-Skills (skills_id [PK], skill_name)
+Skills (skill_name [PK])
 
-Technician_Skill (#technician_id -> Technician , #skill_id -> Skills) [PK]
+Technician_Skill (#technician_id -> Technician , #skill_name -> Skills) [PK]
 
 Bills (bills_id [PK], period_starts, period_ends, kwh_used, amount, issue_date, payment_date, #client_id -> Client, #connection_id -> Connections)
 
