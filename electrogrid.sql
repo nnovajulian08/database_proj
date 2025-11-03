@@ -15,6 +15,8 @@ DROP TABLE IF EXISTS Region CASCADE;
 DROP TABLE IF EXISTS Connection_Type CASCADE;
 DROP TABLE IF EXISTS Status CASCADE;
 DROP TABLE IF EXISTS Service_Type CASCADE;
+DROP TABLE IF EXISTS Meter_Check CASCADE;
+
 
 
 CREATE TABLE Region (
@@ -35,9 +37,11 @@ CREATE TABLE Service_Type (
 
 CREATE TABLE Person (
     person_id VARCHAR(50) PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
+    name VARCHAR(150) NOT NULL
+    CONSTRAINT valid_name CHECK (name ~ '^[A-Za-z\s]+$'),
     email VARCHAR(150) UNIQUE,
-    phone VARCHAR(50) UNIQUE
+    phone BIGINT UNIQUE
+    CONSTRAINT valid_phone CHECK (phone::TEXT ~ '^[0-9]{1,9}$')
 );
 
 CREATE TABLE Client (
