@@ -2,7 +2,11 @@ Person (person_id [PK] , name [NN], email [UK], phone [UK])
 
 Client (#person_id -> Person [PK] ,address [NN])
 
-Technician (#person_id -> Person [PK],#region_name -> Region, #skill )
+Technician (#person_id -> Person [PK],#region_name -> Region)
+
+Skills (skill_name [PK])
+
+Technician_Skill (#technician_id -> Technician , #skill_name -> Skills) [PK]
 
 Bills (bills_id [PK], period_starts, period_ends, kwh_used, amount, issue_date, payment_date, #client_id -> Client, #connection_id -> Connections)
 
