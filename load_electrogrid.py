@@ -1,167 +1,287 @@
+import os
+import sys
+from pathlib import Path
 import pandas as pd
 import psycopg2
-from psycopg2.extras import execute_values
+from psycopg2.extras import execute_batch
+from dotenv import load_dotenv
 
-# ===============================
+# ===============================================================
 # CONFIGURATION
-# ===============================
-DB_CONFIG = {
-    "host": "localhost",
-    "dbname": "energy_services",
-    "user": "postgres",
-    "password": "your_password",
-    "port": 5432
+# ===============================================================
+load_dotenv()  # Load from .env
+
+PGHOST = os.getenv("PGHOST", "localhost")
+PGPORT = int(os.getenv("PGPORT", "5432"))
+PGDATABASE = os.getenv("PGDATABASE", "postgres")
+PGUSER = os.getenv("PGUSER", "postgres")
+PGPASSWORD = os.getenv("PGPASSWORD", "")
+PGSCHEMA = os.getenv("PGSCHEMA", "public")
+CSV_DIR = Path(os.getenv("CSV_DIR", "."))
+
+FILES = {
+    "clients": CSV_DIR / "clients_raw.csv",
+    "technicians": CSV_DIR / "technicians_raw.csv",
+    "connections": CSV_DIR / "connections_raw.csv",
+    "bills": CSV_DIR / "bills_raw.csv",
+    "service_orders": CSV_DIR / "service_orders_raw.csv",
 }
 
-DATA_FOLDER = "data/"  # folder containing all CSVs
+# ===============================================================
+# DB CONNECTION
+# ===============================================================
+def get_conn():
+    return psycopg2.connect(
+        host=PGHOST, port=PGPORT, dbname=PGDATABASE, user=PGUSER, password=PGPASSWORD
+    )
 
-# ===============================
-# CONNECT TO POSTGRESQL
-# ===============================
-conn = psycopg2.connect(**DB_CONFIG)
-cursor = conn.cursor()
+def tq(name):  # qualify with schema
+    return f'{PGSCHEMA}."{name}"'
 
-def truncate_tables():
-    """Delete all data from tables in dependency-safe order."""
+# ===============================================================
+# CLEANING HELPERS
+# ===============================================================
+def clean_str(x):
+    if pd.isna(x):
+        return None
+    s = str(x).strip()
+    return s if s != "" else None
+
+def to_date(s):
+    if pd.isna(s) or s == "":
+        return None
+    dt = pd.to_datetime(s, errors="coerce")
+    return None if pd.isna(dt) else dt.date()
+
+def load_csv(path):
+    df = pd.read_csv(path, dtype=str, keep_default_na=False)
+    for c in df.columns:
+        df[c] = df[c].map(lambda x: x.strip() if isinstance(x, str) else x)
+        df[c] = df[c].replace({"": None})
+    return df
+
+# ===============================================================
+# DELETE EXISTING DATA
+# ===============================================================
+def delete_all(cur):
     tables = [
-        "Technician_Skill", "Service_Order", "Bill", "Connection",
-        "Technician", "Client", "Person",
-        "Skill", "Service_Type", "Connection_Type", "Region", "Status"
+        "Technician_Skill",
+        "Bills",
+        "Service_Orders",
+        "Connections",
+        "Technician",
+        "Client",
+        "Person",
+        "Skills",
+        "Region",
+        "Connection_Type",
+        "Status",
+        "Service_Type",
     ]
     for t in tables:
-        cursor.execute(f"DELETE FROM {t};")
-    conn.commit()
-    print("✅ Existing data cleared.")
+        cur.execute(f"DELETE FROM {tq(t)};")
 
-# ===============================
-# STEP 1: LOAD RAW DATASETS
-# ===============================
-clients = pd.read_csv(DATA_FOLDER + "Client_raw.csv")
-connections = pd.read_csv(DATA_FOLDER + "Connections_raw.csv")
-bills = pd.read_csv(DATA_FOLDER + "Bills_raw.csv")
-technicians = pd.read_csv(DATA_FOLDER + "Technicians_raw.csv")
-service_orders = pd.read_csv(DATA_FOLDER + "Service_orders_raw.csv")
+# ===============================================================
+# MAIN LOAD LOGIC
+# ===============================================================
+def main():
+    print("📂 Reading CSVs...")
+    clients = load_csv(FILES["clients"])
+    technicians = load_csv(FILES["technicians"])
+    connections = load_csv(FILES["connections"])
+    bills = load_csv(FILES["bills"])
+    service_orders = load_csv(FILES["service_orders"])
 
-# ===============================
-# STEP 2: DATA CLEANING / NORMALIZATION
-# ===============================
+    # ===========================================================
+    # 🧾 RENAME BLOCKS (adjust column names to match your CSVs)
+    # ===========================================================
 
-# --- Normalize technician skills ---
-technicians["skills"] = technicians["skills"].fillna("").apply(lambda x: [s.strip() for s in x.split(",") if s.strip()])
-all_skills = sorted({skill for sub in technicians["skills"] for skill in sub})
-skill_df = pd.DataFrame({"skill_name": all_skills})
-skill_df["skill_id"] = range(1, len(skill_df) + 1)
+    # --- CLIENTS ---
+    print("🧩 Normalizing clients...")
+    clients = clients.rename(columns={
+        "client_id": "person_id",
+        "client_name": "name",
+        "email": "email",
+        "phone": "phone",
+        "address": "address",
+        # if you have a different column name for address, e.g. "property_address"
+        # "property_address": "address"
+    })
 
-# --- Lookup tables ---
-status_df = pd.DataFrame({"status_name": ["Active", "Suspended", "Disconnected"]})
-status_df["status_id"] = range(1, len(status_df) + 1)
+    # --- TECHNICIANS ---
+    print("🧩 Normalizing technicians...")
+    technicians = technicians.rename(columns={
+        "technician_id": "person_id",
+        "technician_name": "name",
+        "email": "email",
+        "phone": "phone",
+        "region": "region_name",  
+        "skills": "skills"
+    })
 
-region_df = pd.DataFrame({"region_name": technicians["region"].unique()})
-region_df["region_id"] = range(1, len(region_df) + 1)
+    # --- CONNECTIONS ---
+    print("🧩 Normalizing connections...")
+    connections = connections.rename(columns={
+        "connection_id": "connection_id",
+        "client_id": "client_id",
+        "technician_id": "technician_id",
+        "property_address": "property_address",
+        "install_date": "install_date",
+        "meter_serial": "meter_serial",
+        "connection_type": "connection_type",
+        "status": "status",
+        # if you have something like "address" or "city"
+        # "address": "property_address",
+        # "city": "city"
+    })
 
-conn_type_df = pd.DataFrame({"type_name": connections["connection_type"].unique()})
-conn_type_df["connection_type_id"] = range(1, len(conn_type_df) + 1)
+    # --- BILLS ---
+    print("🧩 Normalizing bills...")
+    bills = bills.rename(columns={
+        "bill_id": "bills_id",
+        "period_start": "period_starts",
+        "period_end": "period_ends",
+        "kwh_used": "kwh_used",
+        "amount": "amount",
+        "issue_date": "issue_date",
+        "payment_date": "payment_date",
+        "client_id": "client_id",
+        "connection_id": "connection_id"
+    })
 
-service_type_df = pd.DataFrame({"type_name": service_orders["service_type"].unique()})
-service_type_df["service_type_id"] = range(1, len(service_type_df) + 1)
+    # --- SERVICE ORDERS ---
+    print("🧩 Normalizing service orders...")
+    service_orders = service_orders.rename(columns={
+        "service_order_id": "service_order_id",
+        "service_type": "service_type",
+        "start_date": "start_date",
+        "end_date": "end_date",
+        "notes": "notes",
+        "client_id": "client_id",
+        "technician_id": "technician_id",
+        "connection_id": "connection_id"
+    })
 
-# ===============================
-# STEP 3: INSERT DATA HELPERS
-# ===============================
-def insert_df(df, table):
-    cols = ",".join(df.columns)
-    values = [tuple(x) for x in df.to_numpy()]
-    execute_values(cursor, f"INSERT INTO {table} ({cols}) VALUES %s", values)
+    # ===========================================================
+    # 🧠 CLEANING AND LOADING LOGIC (same as before)
+    # ===========================================================
+    technicians["skills_list"] = technicians["skills"].fillna("").map(
+        lambda s: [clean_str(x) for x in s.split(",") if clean_str(x)]
+    )
+    all_skills = sorted({s for lst in technicians["skills_list"] for s in lst})
 
-# ===============================
-# STEP 4: POPULATE LOOKUPS
-# ===============================
-truncate_tables()
+    # Collect lookups
+    regions = sorted({clean_str(x) for x in technicians.get("region_name", pd.Series()).dropna()})
+    conn_types = sorted({clean_str(x) for x in connections.get("connection_type", pd.Series()).dropna()})
+    statuses = sorted({clean_str(x) for x in connections.get("status", pd.Series()).dropna()})
+    serv_types = sorted({clean_str(x) for x in service_orders.get("service_type", pd.Series()).dropna()})
 
-insert_df(status_df, "Status")
-insert_df(region_df, "Region")
-insert_df(conn_type_df, "Connection_Type")
-insert_df(service_type_df, "Service_Type")
-insert_df(skill_df[["skill_id", "skill_name"]], "Skill")
-conn.commit()
-print("✅ Lookup tables populated.")
+    conn = get_conn()
+    conn.autocommit = False
+    try:
+        with conn.cursor() as cur:
+            print("🧹 Deleting old data...")
+            delete_all(cur)
 
-# ===============================
-# STEP 5: PERSON, CLIENT, TECHNICIAN
-# ===============================
-# -- Clients (insert as Person + Client)
-person_clients = clients[["client_id", "client_name", "email", "phone"]].rename(
-    columns={"client_id": "person_id", "client_name": "name"}
-)
-insert_df(person_clients, "Person")
+            print("📥 Inserting lookups...")
+            for table, col, values in [
+                ("Region", "region_name", regions),
+                ("Connection_Type", "connection_type", conn_types),
+                ("Status", "status", statuses),
+                ("Service_Type", "service_type", serv_types),
+                ("Skills", "skill_name", all_skills),
+            ]:
+                if values:
+                    q = f'INSERT INTO {tq(table)} ({col}) VALUES (%s) ON CONFLICT DO NOTHING;'
+                    execute_batch(cur, q, [(v,) for v in values])
 
-clients_clean = clients.merge(status_df, left_on="status", right_on="status_name")[
-    ["client_id", "address", "status_id"]
-]
-insert_df(clients_clean, "Client")
+            print("👥 Loading Person / Client / Technician...")
+            persons = pd.concat([clients[["person_id", "name", "email", "phone"]],
+                                 technicians[["person_id", "name", "email", "phone"]]]).drop_duplicates()
+            execute_batch(cur,
+                f'INSERT INTO {tq("Person")}(person_id,name,email,phone) VALUES (%s,%s,%s,%s) '
+                'ON CONFLICT (person_id) DO NOTHING;',
+                persons.itertuples(index=False, name=None),
+                page_size=500,
+            )
 
-# -- Technicians (insert as Person + Technician)
-person_tech = technicians[["technician_id", "technician_name", "email", "phone"]].rename(
-    columns={"technician_id": "person_id", "technician_name": "name"}
-)
-insert_df(person_tech, "Person")
+            execute_batch(cur,
+                f'INSERT INTO {tq("Client")}(person_id,address) VALUES (%s,%s) '
+                'ON CONFLICT (person_id) DO NOTHING;',
+                clients[["person_id", "address"]].itertuples(index=False, name=None),
+                page_size=500,
+            )
 
-technicians_clean = technicians.merge(region_df, left_on="region", right_on="region_name")[
-    ["technician_id", "region_id"]
-]
-insert_df(technicians_clean, "Technician")
-conn.commit()
-print("✅ Person, Client, and Technician tables populated.")
+            execute_batch(cur,
+                f'INSERT INTO {tq("Technician")}(person_id,region_name) VALUES (%s,%s) '
+                'ON CONFLICT (person_id) DO NOTHING;',
+                technicians[["person_id", "region_name"]].itertuples(index=False, name=None),
+                page_size=500,
+            )
 
-# ===============================
-# STEP 6: CONNECTIONS
-# ===============================
-connections_clean = (
-    connections.merge(conn_type_df, left_on="connection_type", right_on="type_name")
-    .merge(status_df, left_on="status", right_on="status_name")
-)[["connection_id", "client_id", "property_address", "connection_type_id", "install_date", "meter_serial", "status_id"]]
+            print("🧠 Loading Technician_Skill...")
+            tech_skill_rows = [
+                (row.person_id, skill)
+                for _, row in technicians.iterrows()
+                for skill in row.skills_list
+            ]
+            execute_batch(cur,
+                f'INSERT INTO {tq("Technician_Skill")}(technician_id,skill_name) VALUES (%s,%s) '
+                'ON CONFLICT (technician_id,skill_name) DO NOTHING;',
+                tech_skill_rows, page_size=1000
+            )
 
-insert_df(connections_clean, "Connection")
-conn.commit()
-print("✅ Connections populated.")
+            print("🔌 Loading Connections...")
+            connections["install_date"] = connections["install_date"].map(to_date)
+            execute_batch(cur,
+                f'''INSERT INTO {tq("Connections")}
+                    (connection_id,property_address,install_date,meter_serial,
+                     connection_type,status,client_id,technician_id)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+                    ON CONFLICT (connection_id) DO NOTHING;''',
+                connections[["connection_id","property_address","install_date","meter_serial",
+                             "connection_type","status","client_id","technician_id"]].itertuples(index=False, name=None),
+                page_size=1000
+            )
 
-# ===============================
-# STEP 7: BILLS
-# ===============================
-bills_clean = bills[[
-    "bill_id", "connection_id", "period_start", "period_end",
-    "kwh_used", "amount", "issue_date", "payment_date"
-]]
-insert_df(bills_clean, "Bill")
-conn.commit()
-print("✅ Bills populated.")
+            print("💡 Loading Bills...")
+            for col in ["period_starts","period_ends","issue_date","payment_date"]:
+                bills[col] = bills[col].map(to_date)
+            bills["kwh_used"] = pd.to_numeric(bills["kwh_used"], errors="coerce")
+            bills["amount"] = pd.to_numeric(bills["amount"], errors="coerce")
+            execute_batch(cur,
+                f'''INSERT INTO {tq("Bills")}
+                    (bills_id,period_starts,period_ends,kwh_used,amount,
+                     issue_date,payment_date,client_id,connection_id)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                    ON CONFLICT (bills_id) DO NOTHING;''',
+                bills[["bills_id","period_starts","period_ends","kwh_used","amount",
+                       "issue_date","payment_date","client_id","connection_id"]].itertuples(index=False, name=None),
+                page_size=1000
+            )
 
-# ===============================
-# STEP 8: SERVICE ORDERS
-# ===============================
-service_orders_clean = (
-    service_orders.merge(service_type_df, left_on="service_type", right_on="type_name")
-)[["service_order_id", "connection_id", "technician_id", "service_type_id", "start_date", "end_date", "notes"]]
+            print("🧾 Loading Service Orders...")
+            for col in ["start_date","end_date"]:
+                service_orders[col] = service_orders[col].map(to_date)
+            execute_batch(cur,
+                f'''INSERT INTO {tq("Service_Orders")}
+                    (service_order_id,service_type,start_date,end_date,notes,
+                     client_id,technician_id,connection_id)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+                    ON CONFLICT (service_order_id) DO NOTHING;''',
+                service_orders[["service_order_id","service_type","start_date","end_date","notes",
+                                "client_id","technician_id","connection_id"]].itertuples(index=False, name=None),
+                page_size=1000
+            )
 
-insert_df(service_orders_clean, "Service_Order")
-conn.commit()
-print("✅ Service Orders populated.")
+        conn.commit()
+        print("✅ Load complete!")
+    except Exception as e:
+        conn.rollback()
+        print("❌ Error:", e)
+        raise
+    finally:
+        conn.close()
 
-# ===============================
-# STEP 9: TECHNICIAN SKILLS (M:N)
-# ===============================
-tech_skill_pairs = []
-for _, row in technicians.iterrows():
-    for s in row["skills"]:
-        skill_id = skill_df.loc[skill_df["skill_name"] == s, "skill_id"].values[0]
-        tech_skill_pairs.append((row["technician_id"], skill_id))
-
-execute_values(cursor, "INSERT INTO Technician_Skill (technician_id, skill_id) VALUES %s", tech_skill_pairs)
-conn.commit()
-
-# ===============================
-# DONE
-# ===============================
-cursor.close()
-conn.close()
-print("🎉 Database fully populated and normalized successfully in PostgreSQL!")
+if __name__ == "__main__":
+    main()
