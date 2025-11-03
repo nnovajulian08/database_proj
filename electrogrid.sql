@@ -1,17 +1,7 @@
--- ===============================================================
--- ELECTROGRID NORMALIZED DATABASE STRUCTURE (PostgreSQL)
--- Author: Julian Sebastián Núñez Nova
--- Purpose: Fully normalized database schema based on relational model
--- Safe to re-run (drops all existing tables before recreation)
--- ===============================================================
-
 -- Optional schema
--- CREATE SCHEMA IF NOT EXISTS electrogrid;
--- SET search_path TO electrogrid;
+CREATE SCHEMA IF NOT EXISTS electrogrid;
+SET search_path TO electrogrid;
 
--- ===============================================================
--- 1️⃣ DROP TABLES (in reverse dependency order)
--- ===============================================================
 
 DROP TABLE IF EXISTS Technician_Skill CASCADE;
 DROP TABLE IF EXISTS Bills CASCADE;
@@ -26,9 +16,6 @@ DROP TABLE IF EXISTS Connection_Type CASCADE;
 DROP TABLE IF EXISTS Status CASCADE;
 DROP TABLE IF EXISTS Service_Type CASCADE;
 
--- ===============================================================
--- 2️⃣ LOOKUP TABLES
--- ===============================================================
 
 CREATE TABLE Region (
     region_name VARCHAR(100) PRIMARY KEY
@@ -45,10 +32,6 @@ CREATE TABLE Status (
 CREATE TABLE Service_Type (
     service_type VARCHAR(50) PRIMARY KEY
 );
-
--- ===============================================================
--- 3️⃣ CORE ENTITIES
--- ===============================================================
 
 CREATE TABLE Person (
     person_id VARCHAR(50) PRIMARY KEY,
@@ -71,10 +54,6 @@ CREATE TABLE Skills (
     skill_name VARCHAR(100) PRIMARY KEY
 );
 
--- ===============================================================
--- 4️⃣ RELATIONSHIP TABLES (M:N and dependent entities)
--- ===============================================================
-
 CREATE TABLE Technician_Skill (
     technician_id VARCHAR(50) REFERENCES Technician(person_id) ON DELETE CASCADE,
     skill_name VARCHAR(100) REFERENCES Skills(skill_name) ON DELETE CASCADE,
@@ -85,7 +64,7 @@ CREATE TABLE Connections (
     connection_id VARCHAR(50) PRIMARY KEY,
     property_address TEXT NOT NULL,
     install_date DATE,
-    meter_serial VARCHAR(100),
+    meter_serial VARCHAR(100) UNIQUE,
     connection_type VARCHAR(50) REFERENCES Connection_Type(connection_type),
     status VARCHAR(50) REFERENCES Status(status),
     client_id VARCHAR(50) REFERENCES Client(person_id) ON DELETE CASCADE,
@@ -115,9 +94,31 @@ CREATE TABLE Service_Orders (
     connection_id VARCHAR(50) REFERENCES Connections(connection_id)
 );
 
--- ===============================================================
--- ✅ DONE
--- ===============================================================
-
--- You can test by listing tables:
--- \dt
+CREATE TABLE Meter_Check (
+    check_id VARCHAR(50) PRIMARY KEY,
+    meter_serial VARCHAR(100) REFERENCES Connections(meter_serial),
+    technician_id VARCHAR(50) REFERENCES Technician(person_id),
+    check_date DATE,
+    meter_read TEXT
+);
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-03-12', 'overload detected');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-07-28', '42 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-11-05', 'calibration needed');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-05-17', '57 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-09-14', 'display faulty');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-02-08', '23 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-12-30', 'communication error');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-06-21', '68 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-04-03', 'voltage spike');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-10-11', '19 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-08-25', 'meter replacement');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-01-15', '76 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-07-07', 'sensor failure');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-03-29', '34 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-12-12', 'battery low');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-05-05', '89 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-09-18', 'wiring issue');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-02-22', '12 kwh');
+-- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-11-08', 'reset required');
+-- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-06-14', '95 kwh');
+--
