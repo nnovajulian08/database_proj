@@ -65,18 +65,18 @@ def load_csv(path):
 # ===============================================================
 def delete_all(cur):
     tables = [
-        "Technician_Skill",
-        "Bills",
-        "Service_Orders",
-        "Connections",
-        "Technician",
-        "Client",
-        "Person",
-        "Skills",
-        "Region",
-        "Connection_Type",
-        "Status",
-        "Service_Type",
+        "technician_skill",
+        "bills",
+        "service_orders",
+        "connections",
+        "technician",
+        "client",
+        "person",
+        "skills",
+        "region",
+        "connection_type",
+        "status",
+        "service_type",
     ]
     for t in tables:
         cur.execute(f"DELETE FROM {tq(t)};")
