@@ -37,8 +37,7 @@ CREATE TABLE Service_Type (
 
 CREATE TABLE Person (
     person_id VARCHAR(50) PRIMARY KEY,
-    name VARCHAR(150) NOT NULL
-    CONSTRAINT valid_name CHECK (name ~ '^[A-Za-z\s]+$'),
+    name VARCHAR(150) NOT NULL,
     email VARCHAR(150) UNIQUE,
     phone BIGINT UNIQUE
     CONSTRAINT valid_phone CHECK (phone::TEXT ~ '^[0-9]{1,9}$')
