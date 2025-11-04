@@ -1,67 +1,71 @@
 import psycopg2
+from psycopg2.extras import execute_values
 import pandas as pd
 # Configuration
-#
-# PGHOST = "dbm.fe.up.pt"
-# PGPORT = 5433
-# PGDATABASE = "fced01"
-# PGUSER = "fced01"
-# PGPASSWORD = "GROUP1"
-# PGSCHEMA = "electrogrid"
-#
-# CSV_DIR = "./raw_data"
-#
-# #Establishing database access
-#
-#
-# conn = psycopg2.connect(
-#         host=PGHOST,
-#         port=PGPORT,
-#         dbname=PGDATABASE,
-#         user=PGUSER,
-#         password=PGPASSWORD
-#     )
-# cursor = conn.cursor()
-#
-# TABLES = [
-#     "service_orders",
-#     "bills",
-#     "connections",
-#     "technician_skill",
-#     "skills",
-#     "technician",
-#     "client",
-#     "person",
-#     "service_type",
-#     "status",
-#     "connection_type",
-#     "region"
-# ]
-#
-# try:
-#     # Connect to the database
-#     conn = psycopg2.connect(
-#         host=PGHOST,
-#         port=PGPORT,
-#         dbname=PGDATABASE,
-#         user=PGUSER,
-#         password=PGPASSWORD
-#     )
-#     cursor = conn.cursor()
-#     print("Connected successfully!")
-#
-#     # Delete from each table
-#     for table in TABLES:
-#         cursor.execute(f"DELETE FROM {PGSCHEMA}.{table};")
-#         print(f" Cleared table: {table}")
-#
-#     # Commit changes
-#     conn.commit()
-#     print(" All tables cleared successfully.")
-#
-# except Exception as e:
-#     print("Error clearing tables:", e)
-#     conn.rollback()
+
+
+PGHOST = "dbm.fe.up.pt"
+PGPORT = 5433
+PGDATABASE = "fced01"
+PGUSER = "fced01"
+PGPASSWORD = "GROUP1"
+PGSCHEMA = "electrogrid"
+
+CSV_DIR = "./raw_data"
+
+#Establishing database access
+
+
+conn = psycopg2.connect(
+        host=PGHOST,
+        port=PGPORT,
+        dbname=PGDATABASE,
+        user=PGUSER,
+        password=PGPASSWORD
+    )
+cursor = conn.cursor()
+
+
+
+TABLES = [
+    "service_orders",
+    "bills",
+    "connections",
+    "technician_skill",
+    "skills",
+    "technician",
+    "client",
+    "person",
+    "service_type",
+    "status",
+    "connection_type",
+    "region"
+]
+
+try:
+    # Connect to the database
+    conn = psycopg2.connect(
+        host=PGHOST,
+        port=PGPORT,
+        dbname=PGDATABASE,
+        user=PGUSER,
+        password=PGPASSWORD
+    )
+    cursor = conn.cursor()
+    print("Connected successfully!")
+
+    # Delete from each table
+    for table in TABLES:
+        cursor.execute(f"DELETE FROM {PGSCHEMA}.{table};")
+        print(f" Cleared table: {table}")
+
+    # Commit changes
+    conn.commit()
+    print(" All tables cleared successfully.")
+
+except Exception as e:
+    print("Error clearing tables:", e)
+    conn.rollback()
 
 
 #Read, clean, and transform the data
@@ -73,8 +77,8 @@ raw_cdf = pd.read_csv('raw_data/clients_raw.csv')
 
 # region df
 
-region_df = raw_tdf[['region']].copy()
-region_df['region'] = region_df['region'].astype(str).str.strip()
+region_df = (raw_tdf[['region']]).rename(columns={'region':'region_name'}).copy()
+region_df['region_name'] = region_df['region_name'].astype(str).str.strip()
 region_df = region_df.drop_duplicates()
 
 # connection_type df
@@ -125,3 +129,94 @@ client_df = ((raw_cdf[['client_id', 'address']])
 client_df['person_id'] = client_df['person_id'].astype(str).str.strip()
 client_df['address'] = client_df['address'].astype(str).str.strip()
 client_df = client_df.drop_duplicates(subset=['person_id'], keep='first')
+
+
+
+# Convert DataFrame to list of tuples
+
+datamart_region = [tuple(x) for x in region_df.to_numpy()]
+columns_region = ', '.join(region_df.columns)
+
+datamart_connection_type = [tuple(x) for x in connection_type_df.to_numpy()]
+columns_connection_type = ', '.join(connection_type_df.columns)
+
+datamart_status = [tuple(x) for x in status_df.to_numpy()]
+columns_status = ', '.join(status_df.columns)
+
+datamart_connection_type = [tuple(x) for x in connection_type_df.to_numpy()]
+columns_connection_type = ', '.join(connection_type_df.columns)
+
+datamart_service_type = [tuple(x) for x in service_type_df.to_numpy()]
+columns_service_type = ', '.join(service_type_df.columns)
+
+datamart_person = [tuple(x) for x in person_df.to_numpy()]
+columns_person = ', '.join(person_df.columns)
+
+datamart_client = [tuple(x) for x in client_df.to_numpy()]
+columns_client = ', '.join(client_df.columns)
+
+# SQL query
+# insert_query = (f"INSERT INTO electrogrid.region ({columns_region}) VALUES %s;"
+#                 f"INSERT INTO electrogrid.connection_type ({columns_connection_type}) VALUES %s;"
+#                 f"INSERT INTO electrogrid.status ({columns_status}) VALUES %s;"
+#                 f"INSERT INTO electrogrid.service_type ({columns_service_type}) VALUES %s;"
+#                 f"INSERT INTO electrogrid.person ({columns_person}) VALUES %s;"
+#                 f"INSERT INTO electrogrid.client ({columns_client}) VALUES %s;")
+
+try:
+    with conn.cursor() as cur:
+        # Insert into region
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.region ({columns_region}) VALUES %s",
+            datamart_region
+        )
+
+        # Insert into connection_type
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.connection_type ({columns_connection_type}) VALUES %s",
+            datamart_connection_type
+        )
+
+        # Insert into status
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.status ({columns_status}) VALUES %s",
+            datamart_status
+        )
+
+        # Insert into service_type
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.service_type ({columns_service_type}) VALUES %s",
+            datamart_service_type
+        )
+
+        # Insert into person
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.person ({columns_person}) VALUES %s",
+            datamart_person
+        )
+
+        # Insert into client
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.client ({columns_client}) VALUES %s",
+            datamart_client
+        )
+
+    conn.commit()
+    print("All data inserted successfully!")
+
+except Exception as e:
+    conn.rollback()
+    print(f"Error: {e}")
+
+conn.commit()
+cursor.close()
+conn.close()
+
+
+
