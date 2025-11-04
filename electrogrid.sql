@@ -104,24 +104,4 @@ CREATE TABLE Meter_Check (
     check_date DATE,
     meter_read TEXT
 );
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-03-12', 'overload detected');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-07-28', '42 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-11-05', 'calibration needed');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-05-17', '57 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-09-14', 'display faulty');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-02-08', '23 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-12-30', 'communication error');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-06-21', '68 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-04-03', 'voltage spike');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-10-11', '19 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-08-25', 'meter replacement');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-01-15', '76 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-07-07', 'sensor failure');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-03-29', '34 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-12-12', 'battery low');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-05-05', '89 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-09-18', 'wiring issue');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-02-22', '12 kwh');
--- INSERT INTO meter_check VALUES ('CH01', 'MTR1000', '2024-11-08', 'reset required');
--- INSERT INTO meter_check VALUES ('CH02', 'MTR1001', '2024-06-14', '95 kwh');
---
+

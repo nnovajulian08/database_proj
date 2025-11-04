@@ -131,11 +131,11 @@ client_df['address'] = client_df['address'].astype(str).str.strip()
 client_df = client_df.drop_duplicates(subset=['person_id'], keep='first')
 
 
-
 # Convert DataFrame to list of tuples
 
 datamart_region = [tuple(x) for x in region_df.to_numpy()]
 columns_region = ', '.join(region_df.columns)
+
 
 datamart_connection_type = [tuple(x) for x in connection_type_df.to_numpy()]
 columns_connection_type = ', '.join(connection_type_df.columns)
@@ -155,13 +155,27 @@ columns_person = ', '.join(person_df.columns)
 datamart_client = [tuple(x) for x in client_df.to_numpy()]
 columns_client = ', '.join(client_df.columns)
 
-# SQL query
-# insert_query = (f"INSERT INTO electrogrid.region ({columns_region}) VALUES %s;"
-#                 f"INSERT INTO electrogrid.connection_type ({columns_connection_type}) VALUES %s;"
-#                 f"INSERT INTO electrogrid.status ({columns_status}) VALUES %s;"
-#                 f"INSERT INTO electrogrid.service_type ({columns_service_type}) VALUES %s;"
-#                 f"INSERT INTO electrogrid.person ({columns_person}) VALUES %s;"
-#                 f"INSERT INTO electrogrid.client ({columns_client}) VALUES %s;")
+meter_check_data = [
+    ('CH001', 'MTR1000', 'T001', '2024-03-12', 'overload detected'),
+    ('CH002', 'MTR1001', 'T002', '2024-07-28', '42 kwh'),
+    ('CH003', 'MTR1002', 'T003', '2024-11-05', 'calibration needed'),
+    ('CH004', 'MTR1003', 'T004', '2024-05-17', '57 kwh'),
+    ('CH005', 'MTR1004', 'T005', '2024-09-14', 'display faulty'),
+    ('CH006', 'MTR1005', 'T006', '2024-02-08', '23 kwh'),
+    ('CH007', 'MTR1006', 'T007', '2024-12-30', 'communication error'),
+    ('CH008', 'MTR1007', 'T008', '2024-06-21', '68 kwh'),
+    ('CH009', 'MTR1008', 'T009', '2024-04-03', 'voltage spike'),
+    ('CH010', 'MTR1009', 'T010', '2024-10-11', '19 kwh'),
+    ('CH011', 'MTR1010', 'T011', '2024-08-25', 'meter replacement'),
+    ('CH012', 'MTR1011', 'T012', '2024-01-15', '76 kwh'),
+    ('CH013', 'MTR1012', 'T013', '2024-07-07', 'sensor failure'),
+    ('CH014', 'MTR1013', 'T014', '2024-03-29', '34 kwh'),
+    ('CH015', 'MTR1014', 'T015', '2024-12-12', 'battery low'),
+    ('CH016', 'MTR1015', 'T016', '2024-05-05', '89 kwh'),
+    ('CH017', 'MTR1016', 'T017', '2024-09-18', 'wiring issue'),
+    ('CH018', 'MTR1017', 'T018', '2024-02-22', '12 kwh'),
+    ('CH019', 'MTR1018', 'T019', '2024-11-08', 'reset required'),
+    ('CH020', 'MTR1019', 'T020', '2024-06-14', '95 kwh')]
 
 try:
     with conn.cursor() as cur:
@@ -206,6 +220,10 @@ try:
             f"INSERT INTO electrogrid.client ({columns_client}) VALUES %s",
             datamart_client
         )
+        cur.executemany(
+            "INSERT INTO electrogrid.meter_check VALUES (%s, %s, %s, cast(%s as date), %s)",
+            meter_check_data
+        )
 
     conn.commit()
     print("All data inserted successfully!")
@@ -217,6 +235,5 @@ except Exception as e:
 conn.commit()
 cursor.close()
 conn.close()
-
 
 
