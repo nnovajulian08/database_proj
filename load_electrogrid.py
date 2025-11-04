@@ -29,6 +29,7 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 TABLES = [
+    "meter_check",
     "service_orders",
     "bills",
     "connections",
@@ -67,8 +68,6 @@ try:
 except Exception as e:
     print("Error clearing tables:", e)
     conn.rollback()
-
-#---------------------------------- KIRILL's DATA CLEANING --------------------------------------#
 
 #Read, clean, and transform the data
 
@@ -157,8 +156,6 @@ datamart_client = [tuple(x) for x in client_df.to_numpy()]
 columns_client = ', '.join(client_df.columns)
 
 
-#-------------------------- JULIAN'S DATA CLEANING ---------------------------------------#
-
 #Read, clean, and transform the data
 CSV_DIR = Path("./raw_data")
 
@@ -197,6 +194,7 @@ df_service_orders = df_service_orders.dropna(subset=["service_order_id", "client
 
 # Remove duplicates
 df_service_orders = df_service_orders.drop_duplicates(subset=["service_order_id"])
+df_service_orders = df_service_orders[df_service_orders['client_id'].isin(client_df['person_id'])]
 
 # Reorder columns to match SQL schema definition
 df_service_orders = df_service_orders[
@@ -263,6 +261,7 @@ df_bills = df_bills.dropna(subset=["bills_id", "client_id", "connection_id"])
 
 # Remove duplicates
 df_bills = df_bills.drop_duplicates(subset=["bills_id"])
+df_bills = df_bills[df_bills['client_id'].isin(client_df['person_id'])]
 
 # Reorder columns to match SQL table definition
 df_bills = df_bills[
@@ -318,7 +317,7 @@ for col in text_cols:
     df_connnections[col] = df_connnections[col].astype(str).str.strip()
 
 # Standardize case for connection_type and status
-df_connnections["connection_type"] = df_connnections["connection_type"].str.title()
+df_connnections["connection_type"] = df_connnections["connection_type"].str.strip()
 df_connnections["status"] = df_connnections["status"].str.title()
 
 # Convert date column
@@ -329,6 +328,7 @@ df_connnections = df_connnections.dropna(subset=["connection_id", "client_id", "
 
 # Remove duplicates
 df_connnections = df_connnections.drop_duplicates(subset=["connection_id"])
+df_connnections = df_connnections[df_connnections['client_id'].isin(client_df['person_id'])]
 
 # Reorder columns to match SQL schema
 df_connnections = df_connnections[
@@ -394,8 +394,6 @@ columns_skills = ', '.join(df_skills.columns)
 
 
 # ------------------------------------Technicians-----------------------------------------#
-# Read CSV
-df_raw = pd.read_csv(CSV_DIR/"technicians_raw.csv")
 
 # Keep only relevant columns
 df_technicians = df_raw[["technician_id", "region"]].copy()
@@ -424,11 +422,31 @@ df_technicians = df_technicians[["person_id", "region_name"]]
 datamart_technicians = [tuple(x) for x in df_technicians.to_numpy()]
 columns_technicians = ', '.join(df_technicians.columns)
 
+# ------------------------------------Meter_Check-----------------------------------------#
 
-#----------------------- LOAD DATA INTO DATABASE ----------------------------------------#
+meter_check_data = [
+    ('CH001', 'MTR1000', 'T001', '2024-03-12', 'overload detected'),
+    ('CH002', 'MTR1001', 'T002', '2024-07-28', '42 kwh'),
+    ('CH003', 'MTR1002', 'T003', '2024-11-05', 'calibration needed'),
+    ('CH004', 'MTR1003', 'T004', '2024-05-17', '57 kwh'),
+    ('CH005', 'MTR1004', 'T005', '2024-09-14', 'display faulty'),
+    ('CH006', 'MTR1005', 'T006', '2024-02-08', '23 kwh'),
+    ('CH007', 'MTR1006', 'T007', '2024-12-30', 'communication error'),
+    ('CH008', 'MTR1007', 'T008', '2024-06-21', '68 kwh'),
+    ('CH009', 'MTR1008', 'T009', '2024-04-03', 'voltage spike'),
+    ('CH010', 'MTR1009', 'T010', '2024-10-11', '19 kwh'),
+    ('CH011', 'MTR1010', 'T011', '2024-08-25', 'meter replacement'),
+    ('CH012', 'MTR1011', 'T012', '2024-01-15', '76 kwh'),
+    ('CH013', 'MTR1012', 'T013', '2024-07-07', 'sensor failure'),
+    ('CH014', 'MTR1013', 'T014', '2024-03-29', '34 kwh'),
+    ('CH015', 'MTR1014', 'T015', '2024-12-12', 'battery low'),
+    ('CH016', 'MTR1015', 'T016', '2024-05-05', '89 kwh'),
+    ('CH017', 'MTR1016', 'T017', '2024-09-18', 'wiring issue'),
+    ('CH018', 'MTR1017', 'T018', '2024-02-22', '12 kwh'),
+    ('CH019', 'MTR1018', 'T019', '2024-11-08', 'reset required'),
+    ('CH020', 'MTR1019', 'T020', '2024-06-14', '95 kwh')]
 
-# SQL query
-
+# LOAD DATA INTO DATABASE
 
 try:
     with conn.cursor() as cur:
@@ -502,11 +520,23 @@ try:
             datamart_connections
         )
 
+        cur.executemany(
+            "INSERT INTO electrogrid.meter_check VALUES (%s, %s, %s, cast(%s as date), %s)",
+            meter_check_data
+        )
+
         # Insert into bills
         execute_values(
             cur,
             f"INSERT INTO electrogrid.bills ({columns_bills}) VALUES %s",
             datamart_bills
+        )
+
+        # Insert into service_orders
+        execute_values(
+            cur,
+            f"INSERT INTO electrogrid.service_orders ({columns_service_orders}) VALUES %s",
+            datamart_service_orders
         )
 
     conn.commit()
@@ -520,4 +550,22 @@ conn.commit()
 cursor.close()
 conn.close()
 
+
+# to verify data insertion:
+
+'''
+--select * from electrogrid.region;
+--select * from electrogrid.connection_type;
+--select * from electrogrid.status;
+--select * from electrogrid.service_type;
+--select * from electrogrid.person;
+--select * from electrogrid.client;
+--select * from electrogrid.technician;
+--select * from electrogrid.skills;
+--select * from electrogrid.technician_skill;
+--select * from electrogrid.connections;
+--select * from electrogrid.bills;
+--select * from electrogrid.service_orders;
+--select * from electrogrid.meter_check;
+'''
 
