@@ -138,7 +138,8 @@ For our user interface section (**electrogrid.py**) we decided to create the fol
 
 ### Kirill:
 - Design UML and created final uml.png
-- Incorporated the model extension "meter_check" into UML diagram 
+- Incorporated the model extension "meter_check"
 - Wrote script for data cleaning and loading for the following tables in load_electrogrid: "client","person",
 "service_type","status","connection_type","region", and "meter_check".
-- Completed debugging for the load_electrogrid script 
+- Wrote script electrogrid.sql to create tables in the database corresponding to the relational model
+- Completed debugging for the load_electrogrid script
