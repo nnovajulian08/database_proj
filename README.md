@@ -36,9 +36,9 @@ Database_proj
 ├── electrogid.sql                #Creates tables in database
 ├── load_electrogrid.py           #Loads data into database
 ├── electrogrid.py                #UI module to interact with user input       
+├── README.md                     #Project Description
 ├── relational.txt                #Relational Model as text file
-├── uml.png                       #Image of UML Diagram
-├── README.md                     #Project description
+├── uml.png                       #UML Diagram
 ```
 
 ## Design Decisions
